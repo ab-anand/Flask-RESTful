@@ -1,52 +1,27 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
-from json import dumps
 import json
 
 app = Flask(__name__)
 api = Api(app)
 
 
-
 # dummy data for end points
 input = open('data.json')
 data = json.load(input)
 hospital = data['hospital']
-
-services = {
-    'services': [{
-        'service-name': 'Pradhan Mantri jannani suraksha yojna',
-        'details': 'Provides financial assistance of Rs. 500 upto 2 births to pregnant women who have attend 19 years of age and below poverty level.'
-    }, {
-        'service-name': 'Electronic Health Record',
-        'details': 'Govt. introduced electronic health record(EHR) to make digitalize health care sector with better efficiency.'
-    }, {
-        'service-name': 'Strategic Purchase',
-        'details': 'Strategic Purchase of secondary and tertiary health care services.'
-    }, {
-        'service-name': 'Health and Wellness centre',
-        'details': 'Hospitals stock and staff surgical suites that can be used for outpatient services or in-depth procedures, such as transplants, heart surgery and repairing broken bones. '
-    }, {
-        'service-name': 'National Digital Health Authority',
-        'details': 'It regulates and deploy national degital health care.'
-    },
-    {
-        'service-name': 'Notification',
-        'details': 'Zika virus notification'
-    }]
-}
-
+services = data['services']
 complaint = data['complaint']
 
 
 class Services(Resource):
     def get(self):
-        return services
+        return {"services":services}
 
 
 class Complaints(Resource):
     def get(self):
-        return complaint
+        return {"complaints":complaint}
 
     def post(self):
         print(request)
@@ -65,7 +40,7 @@ class Complaints(Resource):
 
 class Hospital(Resource):
     def get(self):
-        return hospital
+        return {"hospitals":hospital}
 
     def post(self):
         hospital.append({
@@ -87,4 +62,4 @@ api.add_resource(Complaints, '/complaints')
 api.add_resource(Hospital, '/hospital')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
