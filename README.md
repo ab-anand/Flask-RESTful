@@ -9,6 +9,6 @@ Follow this article for detailed explaination of this API creation ![REST API wi
        $ cd Flask-RESTful
        $ python app.py
     
-Visit ![localhost:5000/services](http://localhost:5000/services) in your web browser
+Visit ![localhost:5000/services](http://localhost:5000/services) in your web browser or any other endpoints like <i>'/complaints'</i> or <i>'/hospital'</i>
     
 
